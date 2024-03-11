@@ -1,17 +1,15 @@
 import { reactive } from 'vue'
 import ls from '@/utils/Storage'
-import setPermission from './permission'
 import { UserInfo } from '@/services/user'
 import userStore from './permission'
 import { UserInfoProp } from '@/services/user/types'
 import {
   SITE_PERMISSION,
   PERMISSION_USERINFO,
-  PERMISSION_ROLE,
   PERMISSION_MENU,
+  ACCESS_TOKEN,
   PERMISSION_ABILITY
 } from '@/store/mutation-types'
-import generateAsyncRoutes from '@/router/generateAsyncRoutes'
 
 const useStoreUser = {
   state: reactive({
@@ -50,18 +48,11 @@ export const getUserInfo = async () => {
     return false
   }
 }
+// 重置store数据
 export const resetPermissions = () => {
-  setPermission.mutations(PERMISSION_ROLE, null)
-  setPermission.mutations(PERMISSION_MENU, [])
-  setPermission.mutations(PERMISSION_ABILITY, [])
-  // setAccessToken('')
-  // auth.changeValue('admin', false)
-  // auth.changeValue('role', [])
-  // auth.changeValue('ability', [])
-  // auth.changeValue('menu', [])
-  // routes.resetRoute()
-  // tabsRouter.blankingTabs()
-  // tabsRouter.blankingTabs()
-  // removeAccessToken()
+  useStoreUser.state.user = {} as UserInfoProp
+  ls.set(ACCESS_TOKEN, '')
+  userStore.commit(PERMISSION_MENU, [])
+  userStore.commit(PERMISSION_ABILITY, [])
 }
 export default useStoreUser

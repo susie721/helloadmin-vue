@@ -1,22 +1,17 @@
 <template>
-  <a-config-provider :locale="lang[locale]" :theme="{
-    token: {
-      colorPrimary: systemConfig.state.color,
-      colorInfo: '#363e4a',
-      colorTextBase: '#172b4d',
-      borderRadius: 2,
-      colorBgLayout: '#ffffff'
-    },
-    components: {
-      Select: {
-
-      }
-    }
-  }">
-    <!-- algorithm: theme.darkAlgorithm,夜间主题 -->
-    <router-view />
-  </a-config-provider>
-  <LockScreen />
+    <a-config-provider :locale="lang[locale]" :theme="{
+        token: {
+            colorPrimary: systemConfig.state.color,
+            colorInfo: '#363e4a',
+            colorTextBase: '#172b4d',
+            borderRadius: 2,
+            colorBgLayout: '#ffffff'
+        }
+    }">
+        <!-- algorithm: theme.darkAlgorithm,夜间主题 -->
+        <router-view />
+    </a-config-provider>
+    <LockScreen />
 </template>
 
 <script lang="ts" setup name="App">
@@ -43,22 +38,18 @@ setDeviceType()
 
 const router = useRouter()
 emitter.once('axios_goto_login', () => {
-  router.push({ name: 'login' })
+    router.push({ name: 'login' })
 })
 //全局错误处理
 onErrorCaptured((err, instance, info) => {
-  if (window.env !== 'localhost') {
-    // debugger
-    console.log(err, instance, info)
-    Modal.error({
-      title: 'System Error',
-      content: h('pre', err.stack),
-      class: 'errorCapturedModal',
-      width: '60%'
-    })
-  }
+    if (window.env !== 'localhost') {
+        // debugger
+        Modal.error({
+            title: 'System Error',
+            content: h('pre', err.stack),
+            class: 'errorCapturedModal',
+            width: '60%'
+        })
+    }
 })
 </script>
-
-<style>
-</style>

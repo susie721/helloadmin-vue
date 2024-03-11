@@ -9,9 +9,6 @@ dayjs.extend(timezone)
 
 export function clearUserInfo() {
     ls.remove(ACCESS_TOKEN)
-    ls.remove(PERMISSION)
-    ls.remove(USER_INFO)
-    ls.remove(MENU_NAV)
 }
 
 export function timeFix() {

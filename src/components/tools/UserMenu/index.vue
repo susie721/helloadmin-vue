@@ -61,25 +61,22 @@
 
 <script lang="ts" setup name="UserMenu">
 import NoticeIcon from '@/components/NoticeIcon/index.vue'
-import { logout } from '@/views/user/service'
-import { USER_INFO } from '@/store/mutation-types'
 import { Modal } from 'ant-design-vue'
 import {
     QuestionCircleOutlined,
-    SettingOutlined,
     LogoutOutlined,
     LockOutlined
 } from '@ant-design/icons-vue'
 import { useI18n } from 'vue-i18n'
 import { systemConfig } from '@/store/reactiveState'
-import SelectLang from '@/components/SelectLang'
+// import SelectLang from '@/components/SelectLang'
 // import ls from '@/utils/Storage'
 import userSiteUser from '@/store/userSiteUser'
 import { useRouter } from 'vue-router'
 import { clearUserInfo } from '@/utils/util'
+import { resetPermissions } from '@/store/modules/user'
 
-
-const props = defineProps(['theme'])
+// const props = defineProps(['theme'])
 const { t } = useI18n()
 const router = useRouter()
 const { userInfo } = userSiteUser()
@@ -90,15 +87,16 @@ const handleLogout = () => {
         onOk: () => {
             // logout().then((res) => {
             clearUserInfo()
+            resetPermissions()
             router.push({ path: '/user/login' })
             // })
         },
         onCancel() { }
     })
 }
-const showSystemSetting = () => {
-    systemConfig.commit('SET_SETTING_DRAWER', true)
-}
+// const showSystemSetting = () => {
+//     systemConfig.commit('SET_SETTING_DRAWER', true)
+// }
 
 const onLockScreen = () => {
     systemConfig.commit('SET_LOCK_SCREEN', true)
