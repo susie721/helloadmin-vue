@@ -41,10 +41,8 @@ export const setupBeforeEach = (router: Router) => {
                     }
                     // 生成动态路由
                     const routes = generateAsyncRoutes(permissionStore.state.menu);
-                    console.log(permissionStore.state.menu)
                     router.addRoute(routes[0])
                     permissionStore.commit('PERMISSION_ROUTES', routes[0].children)
-                    console.log(routes)
                     next({ path: to.path })
                 } else {
                     next()

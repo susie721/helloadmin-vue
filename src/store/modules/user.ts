@@ -18,7 +18,6 @@ const useStoreUser = {
   commit: (field, type) => {
     const fun = {
       [PERMISSION_USERINFO]: (user) => {
-        // cache({ [PERMISSION_USERINFO]: user })
         useStoreUser.state.user = user
       }
     }

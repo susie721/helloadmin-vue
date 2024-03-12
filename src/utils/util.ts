@@ -1,5 +1,5 @@
 import ls from '@/utils/Storage'
-import { ACCESS_TOKEN, PERMISSION, USER_INFO, MENU_NAV } from '@/store/mutation-types'
+import { ACCESS_TOKEN } from '@/store/mutation-types'
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc'
 import timezone from 'dayjs/plugin/timezone'

@@ -1,6 +1,6 @@
 import { timeFix } from '@/utils/util';
 import ls from '@/utils/Storage';
-import { ACCESS_TOKEN, PERMISSION, USER_INFO } from '@/store/mutation-types';
+import { ACCESS_TOKEN, PERMISSION } from '@/store/mutation-types';
 import { message, notification } from 'ant-design-vue';
 import { Router } from 'vue-router'
 import { getSmsCaptcha } from './service'
@@ -16,7 +16,6 @@ export const loginSuccess = (res, router: Router) => {
     if (res.accessToken) {
         ls.set(ACCESS_TOKEN, res.accessToken, 7 * 24 * 60 * 60 * 1000);
         ls.set(PERMISSION, res.permission ? Array.isArray(res?.permission) ? res?.permission : res.permission.split(',') : ['admin']);
-        ls.set(USER_INFO, res);
     }
     router.push({ path: '/' });
 };

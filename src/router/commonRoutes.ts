@@ -1,6 +1,6 @@
 import { UserLayout } from '@/layouts'
 import { Router } from './types'
-import { example } from './exampleRouterMap'
+// import { example } from './exampleRouterMap'
 import errorPage from '@/views/Exception/500.vue'
 
 // info:todo:1.如果使用服务端获取路由,path: '/',这块路由再写就会被覆盖

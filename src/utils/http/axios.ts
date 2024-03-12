@@ -1,11 +1,11 @@
 import axios, { AxiosResponse } from 'axios'
 import { message } from 'ant-design-vue'
 import router from '@/router/index'
-import { ACCESS_TOKEN, USER_INFO } from '@/store/mutation-types'
-import { baseURL } from '@/utils/util'
+import { ACCESS_TOKEN } from '@/store/mutation-types'
+// import { baseURL } from '@/utils/util'
 import ls from '@/utils/Storage'
 import { globalLoading } from '@/store/reactiveState'
-import emitter from '@/utils/eventBus'
+// import emitter from '@/utils/eventBus'
 
 const ContentType = {
     urlencoded: 'application/x-www-form-urlencoded;charset=UTF-8',
@@ -28,13 +28,13 @@ baseService.interceptors.request.use(
     config => {
         globalLoading.value = true
         const token = ls.get(ACCESS_TOKEN)
-        const userinfo = ls.get(USER_INFO)
+        // const userinfo = ls.get(USER_INFO)
         if (token) {
             config.headers['Authorization'] = token // 让每个请求携带自定义 token 请根据实际情况自行修改
         }
-        if (userinfo) {
-            config.headers['username'] = userinfo.username // 让每个请求携带自定义 token 请根据实际情况自行修改
-        }
+        // if (userinfo) {
+        //     config.headers['username'] = userinfo.username // 让每个请求携带自定义 token 请根据实际情况自行修改
+        // }
         config.headers['Content-Type'] = ContentType[config.data instanceof FormData ? 'formData' : 'json']
         return config
     },
@@ -47,20 +47,14 @@ baseService.interceptors.request.use(
 baseService.interceptors.response.use(
     (res: AxiosResponse<any>) => {
         globalLoading.value = false
-        debugger
         if (res.status === 200) {
             return res.data
         } else if (res.status === 401 || res.status === 403) {
-            debugger
             message.error('登录过期或权限不足, 请重新登陆!')
             router.push({ path: '/user/login' })
             return false
         } else if (res.status === 500) {
             message.error('请求数据失败, 请重试!')
-            return false
-        } else if (res.status === 406) {
-            message.error('登陆超时请重新登录!')
-            emitter.emit('axios_goto_login')
             return false
         } else {
             if (window.localStorage.getItem('lang') === 'en') {
@@ -73,8 +67,6 @@ baseService.interceptors.response.use(
         // return res
     },
     error => {
-        console.log(error)
-        debugger
         globalLoading.value = false
         const msg = error.message
         const result = error.response
