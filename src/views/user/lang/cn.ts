@@ -2,7 +2,7 @@ export default {
     'login.username.title': '用户名',
     'login.passnord.title': '密码',
     'login.username.placeholder': "账户: admin{'@'}123.com",
-    'login.password.placeholder': '密码: 随意',
+    'login.password.placeholder': '密码: admin',
     'login.message-invalid-credentials': '账户或密码错误',
     'login.message-invalid-verification-code': '验证码错误',
     'login.tab-login-credentials': '账户密码登录',
